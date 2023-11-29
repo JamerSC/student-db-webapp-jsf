@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<f:metadata>
+    <f:event type="preRenderView" listener="#{studentController.loadStudents()}"/>
+</f:metadata>
+
+<h:head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <title>Student List</title>
+
+    <!-- Add Bootstrap CSS (you may need to adjust the path based on your project setup) -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    </link>
+
+    <style>
+        /* Additional custom CSS styling */
+        .add-student-button {
+            margin-bottom: 15px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #e0e0e0;
+        }
+    </style>
+
+</h:head>
+
+<h:body class="container">
+
+    <h3 class="mt-3">Student View</h3>
+    <hr class="mb-4"/>
+
+    <h:messages globalOnly="true" class="alert alert-info"/>
+
+    <h:button value="Add Student" styleClass="btn btn-primary add-student-button" outcome="add-student-form"/>
+
+    <h:form>
+        <div class="table-responsive">
+            <h:dataTable value="#{studentController.students}" var="tempStudent" class="table table-striped">
+                
+                <h:column>
+                    <f:facet name="header">ID</f:facet>
+                    #{tempStudent.id}
+                </h:column>
+                
+                <h:column>
+                    <f:facet name="header">First Name</f:facet>
+                    #{tempStudent.firstName}
+                </h:column>
+                
+                <h:column>
+                    <f:facet name="header">Last Name</f:facet>
+                    #{tempStudent.lastName}
+                </h:column>
+                
+                
+                <h:column>
+                    <f:facet name="header">Email</f:facet>
+                    #{tempStudent.email}
+                </h:column>
+                
+                <h:column>
+                    <f:facet name="header">Update</f:facet>
+                    <h:commandLink value="Update" action="#{studentController.loadStudent(tempStudent.id)}"/>      
+                </h:column>
+                
+                
+            </h:dataTable>
+        </div>
+    </h:form>
+
+    <!-- Add Bootstrap JS (you may need to adjust the path based on your project setup) -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+</h:body>
+
+</html>
